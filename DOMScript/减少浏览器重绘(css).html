@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>减少浏览器重绘</title>
+</head>
+<body>
+    <div id="mydiv"></div>
+
+    <script>
+
+        //虽然现代浏览器只会重排版一次，但是如果其他代码在这段代码运行时查询布局信息将导致三次重布局发生
+        /*var el = document.getElementById('mydiv');
+        el.style.borderLeft = '1px';
+        el.style.borderRight = '2px';
+        el.style.padding = '5px';*/
+
+        //将所有的改变合并在一起执行
+        /*var el = document.getElementById('mydiv');
+        el.style.cssText = 'border-left: 1px; border-right: 2px; padding: 5px;';*/
+
+        //使用类来管理更清楚
+        /*var el = document.getElementById('mydiv');
+        el.className += ' active';*/
+
+    </script>
+
+</body>
+</html>
