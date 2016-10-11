@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>循环写入DOM</title>
+</head>
+<body>
+
+    <div id="insert"></div>
+
+
+    <script>
+        /*function innerHTMLLoop() {
+            for (var count = 0; count < 15000; count++) {
+                document.getElementById('insert').innerHTML += 'a';
+            }
+        }
+        多次访问一个元素代价是十分高的，应当一次写入
+        */
+        /*function innerHTMLLoop2() {
+            var content = '';
+            for (var count = 0; count < 15000; count++) {
+                content += 'a';
+            }
+            document.getElementById('insert').innerHTML += content;
+        }*/
+
+
+
+        /*
+         var alldivs = document.getElementsByTagName('div');
+         for (var i = 0; i < alldivs.length; i++) {
+         document.body.appendChild(document.createElement('div'))
+         }
+         * */
+        //这是一个死循环
+
+        /*当每次迭代过程访问集合的length 属性时，它导致集合器更新，在所有浏览器上都会产生明显的性能损
+         失。优化的办法很简单，只要将集合的length 属性缓存到一个变量中，然后在循环判断条件中使用这个变
+         量：*/
+
+        /*
+        function loopCacheLengthCollection() {
+            var coll = document.getElementsByTagName_r('div'),
+            len = coll.length;
+            for (var count = 0; count < len; count++) {
+
+            }
+         }
+        * */
+
+
+    </script>
+</body>
+</html>
