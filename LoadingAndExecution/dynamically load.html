@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+    //最好还是使用js库或者框架来异步加载js执行
+
+	//dynamically load script for ie and other browsers
+	//by add the script element into the DOM
+	//callback for script loaded
+	function loadScript(url, callback){
+		var script = document.createElement ("script")
+		script.type = "text/javascript";
+		if (script.readyState){ //IE
+			script.onreadystatechange = function(){
+				if (script.readyState == "loaded" || script.readyState == "complete"){
+				script.onreadystatechange = null;
+				callback();
+				}
+			};
+		} else { //Others
+			script.onload = function(){
+				callback();
+			};
+		}
+		script.src = url;
+		document.getElementsByTagName("head")[0].appendChild(script);
+	}
+
+	loadScript("js/first.js",function(){
+		console.log("first");
+	});
+	loadScript("js/second.js",function(){
+		console.log("second");
+	});
+	//first second
+
+	//嵌套
+
+	/*
+	loadScript("file1.js", function(){
+		loadScript("file2.js", function(){
+			loadScript("file3.js", function(){
+				alert("All files are loaded!");
+			});
+		});
+	});
+	*/
+	console.log("script tag end");
+</script>
+<script src="js/third.js"></script>
+<!--由于script会阻塞DOM，因此会在js都下载并执行完成后，才会去下载执行设置的异步的script标签-->
+</body>
+</html>
