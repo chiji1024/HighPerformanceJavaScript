@@ -1,5 +1,26 @@
 ## DOM编程
 
+###Summary
+
+>Minimize DOM access, and try to work as much as possible in JavaScript.
+
+>Use local variables to store DOM references you'll access repeatedly
+
+>Be careful when dealing with HTML collections because they represent the live, underlying document. Cache
+ the collection length into a variable and use it when iterating, and make a copy of the collection into an array for
+ heavy work on collections.
+ 
+>Use faster APIs when available, such as querySelectorAll() and firstElementChild ( ie9+ )
+ 
+>Be mindful of repaints and reflows; batch style changes, manipulate the DOM tree "offline," and cache and
+ minimize access to layout information.
+ 
+>Position absolutely during animations, and use drag and drop proxies.
+ 
+>Use event delegation to minimize the number of event handlers.
+
+
+
 ###childNodes, children, nextSibling
 >遍历children 比childNodes 更快，因为集合项更少。HTML 源码中的空格实际上是文本节点，它们不包括在children 集合中。
 
@@ -33,5 +54,7 @@
 
 >getComputedStyle() (currentStyle in IE)（在IE 中此函数称为currentStyle）
 
+###减少动画的影响
+>使用绝对坐标定位动画的元素，使其位于页面布局之外
 
 

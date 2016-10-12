@@ -5,9 +5,26 @@
     <title>减少浏览器重绘(js)</title>
 </head>
 <body>
+    <ul></ul>
 
+    <script>
+        /*在文档之外创建并更新一个文档片断，然后将它附加在原始列表上。
+         文档片断是一个轻量级的document 对象，它被设计专用于更新、移动节点之类的任务。文档片断一个便
+         利的语法特性是当你向节点附加一个片断时，实际添加的是文档片断的子节点群，而不是片断自己。*/
+        //以下代码只会出现一次reflow
+        var ul = document.getElementsByTagName("ul")[0]; // assuming it exists
+        var docfrag = document.createDocumentFragment();
+        var browserList = ["Internet Explorer", "Firefox", "Safari",
+            "Chrome", "Opera"];
 
+        browserList.forEach(function(e) {
+            var li = document.createElement("li");
+            li.textContent = e;
+            docfrag.appendChild(li);
+        });
 
-
+        ul.appendChild(docfrag);
+        // a list with well-known web browsers
+    </script>
 </body>
 </html>
