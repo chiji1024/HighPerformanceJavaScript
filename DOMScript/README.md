@@ -2,22 +2,23 @@
 
 ###Summary
 
->Minimize DOM access, and try to work as much as possible in JavaScript.
+<p>DOM 访问和操作是现代网页应用中很重要的一部分。但每次你通过桥梁从ECMAScript 岛到达DOM 岛
+时，都会被收取“过桥费”</p>
 
->Use local variables to store DOM references you'll access repeatedly
+>最小化DOM 访问，在JavaScript 端做尽可能多的事情。
 
->Be careful when dealing with HTML collections because they represent the live, underlying document. Cache
- the collection length into a variable and use it when iterating, and make a copy of the collection into an array for
- heavy work on collections.
+>在反复访问的地方使用局部变量存放DOM 引用
+
+>小心地处理HTML 集合，因为他们表现出“存在性”，总是对底层文档重新查询。将集合的length 属性缓
+ 存到一个变量中，在迭代中使用这个变量。如果经常操作这个集合，可以将集合拷贝到数组中。
  
->Use faster APIs when available, such as querySelectorAll() and firstElementChild ( ie9+ )
+>如果可能的话，使用速度更快的API，诸如querySelectorAll()和firstElementChild。
  
->Be mindful of repaints and reflows; batch style changes, manipulate the DOM tree "offline," and cache and
- minimize access to layout information.
+>注意重绘和重排版；批量修改风格，离线操作DOM 树，缓存并减少对布局信息的访问。
  
->Position absolutely during animations, and use drag and drop proxies.
+>动画中使用绝对坐标，使用拖放代理。
  
->Use event delegation to minimize the number of event handlers.
+>使用事件托管技术最小化事件句柄数量。
 
 
 
