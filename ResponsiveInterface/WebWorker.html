@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>WebWorker</title>
+</head>
+<body>
+
+<script>
+    //处理大量数据数组时候使用worker线程，不影响UI线程
+    var worker = new Worker('./QuickSort.js');
+    var arrSize = 10;
+    worker.onmessage = function (event) {
+        if(event.data['error']){
+            console.log(event.data['error']);
+            return;
+        }else{
+            console.log(event.data);
+        }
+    }
+
+    var rawArr = []
+    for(var i = 0; i < arrSize; i++){
+        rawArr[i] = Math.floor( Math.random() * 100 + 1 );
+    }
+    worker.postMessage(rawArr);
+
+
+</script>
+
+
+
+</body>
+</html>
