@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>multipartXHR</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+
+    /*
+    * base64编码可用于在css文件url(data:image/png,..base64编码字符串..)使用小图片
+    * */
+
+    var req = new XMLHttpRequest();
+    req.open('GET', 'rollupImages.php', true);
+    req.onreadystatechange = function () {
+        if(req.readyState === 4){
+            /*
+            * 当然由于文件可能较大，因而需要在readyState=3的时候分步解析
+            * */
+            var status = req.status;
+            if(status === 200) {
+                splitImages(req.responseText, 'image/*;base64,');
+            }else{
+                console.log('something wrong in the backend with code: '+status);
+            }
+        }
+    }
+    req.send(null);
+    function splitImages(imageString, imageType, selector) {
+        selector = selector || '#container';
+        var container = document.querySelector( selector );
+        var imageDataList = imageString.split('\u0001');
+        var imageEle;
+        var imageType = imageType || 'image/png;base64,';
+
+        for(var i=0; i<imageDataList.length; i++){
+            imageEle = document.createElement("img");
+            imageEle.src = 'data:'+imageType+imageDataList[i];
+            container.appendChild(imageEle);
+        }
+    }
+
+
+</script>
+
+</body>
+</html>
