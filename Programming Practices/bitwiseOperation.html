@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>bitwiseOperation</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    * 位运算相比数学运算性能更好
+    *
+    * */
+
+
+/* 判断一个数的奇偶 */
+
+    //数学运算符
+    function isEven(num) {
+        return ( num % 2 ) === 0;
+    }
+
+    //位运算符
+    //偶数最低位为0， 奇数为1
+    function isEven(num) {
+        return ( num & 1 ) === 0;
+    }
+
+
+/*
+* 位掩码
+*
+* 位掩码在计算机科学中是一种常用的技术，可同时判断多个布尔
+  选项，快速地将数字转换为布尔标志数组。掩码中每个选项的值都等于2 的幂。
+
+* */
+
+    var OPTION_A = 1;
+    var OPTION_B = 2;
+    var OPTION_C = 4;
+    var OPTION_D = 8;
+
+    var options = OPTION_A | OPTION_C | OPTION_D;
+
+    //is option A in the list?
+    if (options & OPTION_A){
+//do something
+    }
+    //is option B in the list?
+    if (options & OPTION_B){
+//do something
+    }
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

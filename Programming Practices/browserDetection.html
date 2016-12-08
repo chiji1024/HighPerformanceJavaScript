@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>browser detection</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    * 延迟加载
+    * 第一次使用时判断浏览器类型并覆盖原有函数，实现之后的调用的高性能
+    * */
+    function addHandler(target, eventType, handler){
+//overwrite the existing function
+        if (target.addEventListener){ //DOM2 Events
+            addHandler = function(target, eventType, handler){
+                target.addEventListener(eventType, handler, false);
+            };
+        } else { //IE
+            addHandler = function(target, eventType, handler){
+                target.attachEvent("on" + eventType, handler);
+            };
+        }
+//call the new function
+        addHandler(target, eventType, handler);
+    }
+
+
+    function removeHandler(target, eventType, handler){
+//overwrite the existing function
+        if (target.removeEventListener){ //DOM2 Events
+            removeHandler = function(target, eventType, handler){
+                target.addEventListener(eventType, handler, false);
+            };
+        } else { //IE
+            removeHandler = function(target, eventType, handler){
+                target.detachEvent("on" + eventType, handler);
+            };
+        }
+//call the new function
+        removeHandler(target, eventType, handler);
+    }
+
+
+
+    /*
+    * 预加载判断浏览器类型
+    * 时间绑定这种立即就会使用的函数还是使用预加载比较合适
+    * */
+    var addHandler = document.body.addEventListener ?
+        function(target, eventType, handler){
+            target.addEventListener(eventType, handler, false);
+        }:
+        function(target, eventType, handler){
+            target.attachEvent("on" + eventType, handler);
+        };
+    var removeHandler = document.body.removeEventListener ?
+        function(target, eventType, handler){
+            target.removeEventListener(eventType, handler, false);
+        }:
+        function(target, eventType, handler){
+            target.detachEvent("on" + eventType, handler);
+        };
+
+    /*
+    *
+    *
+    * */
+
+
+
+</script>
+
+</body>
+</html>

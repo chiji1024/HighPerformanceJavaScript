@@ -9,7 +9,7 @@
 <script>
     //处理大量数据数组时候使用worker线程，不影响UI线程
     var worker = new Worker('./QuickSort.js');
-    var arrSize = 10;
+    var arrSize = 20;
     worker.onmessage = function (event) {
         if(event.data['error']){
             console.log(event.data['error']);
